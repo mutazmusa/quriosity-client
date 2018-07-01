@@ -1,0 +1,30 @@
+{
+    "QuestionSet": {
+        "set_id": "754",
+        "title": "Diabetes Mellitus Diagnosis, Management, and Treatment",
+        "description": "Introductory questions on the appropriate diagnosis and management of diabetes mellitus and associated comorbidities and complications.",
+        "user_id": "27",
+        "published": "1",
+        "private": "0",
+        "created": "2012-08-28 18:03:28",
+        "modified": "2012-08-27 15:09:05",
+        "views": "11",
+        "noq": "5",
+        "noe": "5"
+    },
+    "User": {
+        "user_id": "27",
+        "username": "person"},
+    "Question": [
+        {"question_id": "1366",
+            "prompt": "You are performing a screening physical examination on a 47-year old man. He is generally healthy, and his review of systems is negative. His mother has type 2 diabetes, and he is overweight. Which of the following is generally accepted as the test of choice to screen for type 2 diabetes?",
+            "set_id": "754",
+            "Answer": [
+                {"answer_id": "3961",
+                    "prompt": "A random glucose test",
+                    "question_id": "1366"}]}],
+            
+    "Tag": [
+        {"tag_id": "246", 
+            "text": "diabetes", 
+            "parent_id": "0"}]}

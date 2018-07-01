@@ -1,0 +1,1 @@
+function login(){var a=$("#UserAddForm").serialize();$.ajax({type:"post",url:"checkAnswers",data:a,dataType:"html",success:function(c,b){alert(c)},error:function(c,b){alert(c)}});return false};

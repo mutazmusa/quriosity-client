@@ -1,0 +1,1 @@
+var BASE="/cakephp-1.3.7/Qiurio/";

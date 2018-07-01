@@ -1,0 +1,73 @@
+<!-- SEARCH -->
+<div  data-bind="with: search, visible: search.show">
+    <section class="slim" style="background: rgb(60, 142, 161); color:white ">
+        <div class="container" >
+            <div class="row">
+                <div class="col-md-12">
+                    <div data-bind="visible: results().length == 0">
+                        <h1>Get started</h1>
+                        <h4>Find sets by searching below:</h4>
+                    </div>
+                    <br/>
+                    <form class="form-horizontal" role="form" method="get" action="#/sets/search/">
+                        <div class="form-group form-group-lg">
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="q" data-bind="value: query,  attr: { placeholder: 'E.g. ' + example() } ">
+                                    <span class="input-group-btn">
+                                        <input type="submit" value="Go!" class="btn btn-default btn-lg" />
+                                    </span>
+                                </div>
+                            </div>
+                            <a class="btn btn-default pull-right" data-bind="visible: $parent.set().id() > 0, attr: { 'href': $parent.set().hash }"> <i class="fa fa-undo fa-2"></i> Return to Set</a>
+                        </div>
+                    </form>
+                </div>
+                <!--  <div class="col-md-2">
+                    <div class="col-md-5 text-right pull-right" style="margin-top:20px">
+
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+    <section class="slimmer" style="background:beige" data-bind="visible: results().length > 0">
+        <div class="container">
+            <div class="row">
+                <h2 style="color: grey">Results - <span data-bind="text: results().length"></span> sets found</h2>
+            </div>
+        </div>
+    </section>
+    <section class="slimmest">
+        <div class="container">
+            <div class="row search-results-container">
+                <div data-bind="visible: results().length == 0" style="font-size:190px; color:#BABABA; margin-top: 40px" class="text-center">
+                    <p data-bind="visible: query().length > 0 && hash() != '#/sets/search/?'">
+                        No sets found matching <strong data-bind="text: query"></strong>
+                    </p>
+                    <i class="fa fa-search-plus"></i>
+                    <p style="color: #BABABA" class="">
+                        <br/>
+                        Can't find what you're looking for?
+                    </p>
+                    <p><a class=""  href="#/create">Create your own</a></p>
+                </div>
+                <div data-bind="visible: results().length > 0">
+                    <div class="panel panel-default" style="border: 0px">
+                        <!-- Default panel contents -->
+                        <!-- ko foreach: results -->
+                        <div class="panel-body">
+                            <a class="search-result" data-bind="attr: { href: '#/sets/' + set_id() }">
+                                <p class="" data-bind="text: title"></p>
+                                <span data-bind="text: 'Created on ' + created()"></span> -
+                                <span class="" data-bind="text: views() + ' views'"></span>
+                            </a>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- /SEARCH -->

@@ -1,0 +1,1 @@
+function ShowGraph(a){if(a=="none"){$("#quizgraph").attr("src","img/graphs/none.png")}else{$("#quizgraph").attr("src","img/graphs/"+a+".png")}$("#quizgraph").fadeIn("slow")};

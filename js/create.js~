@@ -1,0 +1,139 @@
+/**
+ * @author Mutaz Musa
+ */
+
+$(document).ready(function()
+{
+	$('#submitreset').css({'top':($(window).scrollTop()+$(window).height()-$('#submitreset').outerHeight())+"px" },{queue: false, duration: 350});
+}
+);
+//scroll the message box to the top offset of browser's scrool bar
+$(window).scroll(function()
+{
+	$('#controlpanel').animate({'top':$(window).scrollTop()+"px" },{queue: false, duration: 350});
+	$('#submitreset').animate({'top':($(window).scrollTop()+$(window).height()-$('#submitreset').outerHeight())+"px" },{queue: false, duration: 350});
+	$('#messagebox').animate({'top':$(window).scrollTop()+100+"px" },{queue: false, duration: 350});
+});
+
+function AddQuestion()
+{
+	var id = document.getElementById("q_id").value;
+	//Initialize the number of questions static variable
+	if ( typeof AddQuestion.q_number == 'undefined' ) { AddQuestion.q_number = 0; }
+	
+	$("#question_space").append("<div id='question"+id+"' class='full_question'>\
+<table id='questionsform'>\
+	<tr>\
+		<td valign='top'><span id='question_number'></span>Prompt:</td>\
+		<td><textarea name='questions["+id+"][prompt]' rows='10' cols='70'></textarea></td>\
+		<td valign='bottom'>Correct Choice</td>\
+	</tr>\
+	<tr>\
+		<td valign='top'>(A)</td>\
+		<td><input type='text' name='questions["+id+"][answers][a]' size='43' /></td>\
+		<td align='center'><input type='radio' name='questions["+id+"][correct]' value='a' checked='checked' /></td>\
+	</tr>\
+	<tr>\
+		<td valign='top'>(B)</td>\
+		<td><input type='text' name='questions["+id+"][answers][b]' size='43' /></td>\
+		<td align='center'><input type='radio' name='questions["+id+"][correct]' value='b' /></td>\
+	</tr>\
+	<tr>\
+		<td valign='top'>(C)</td>\
+		<td><input type='text' name='questions["+id+"][answers][c]' size='43' /></td>\
+		<td align='center'><input type='radio' name='questions["+id+"][correct]' value='c' /></td>\
+	</tr>\
+	<tr>\
+		<td valign='top'>(D)</td>\
+		<td><input type='text' name='questions["+id+"][answers][d]' size='43' /></td>\
+		<td align='center'><input type='radio' name='questions["+id+"][correct]' value='d' /></td>\
+	</tr>\
+	<tr>\
+		<td valign='top'>(E)</td>\
+		<td><input type='text' name='questions["+id+"][answers][e]' size='43' /></td>\
+		<td align='center'><input type='radio' name='questions["+id+"][correct]' value='e' /></td>\
+	</tr>\
+	<tr>\
+		<td valign='top'>Explanation:</td>\
+		<td><textarea name='questions["+id+"][explanation]' rows='2' cols='40'></textarea></td>\
+		<td></td>\
+	</tr>\
+</table>\
+<input type='button' value='Remove Question' name='remove_q' onclick='RemoveQuestion(\"#question"+id+"\");'> \
+</div>\
+	");
+	$('#question'+id).slideDown('fast');
+	document.getElementById("q_id").value = Number(id)+1;
+	AddQuestion.q_number++;
+	document.getElementById("q_number").innerHTML = AddQuestion.q_number;
+	RefreshQuestionNumbers();
+}
+
+function RemoveQuestion(id)
+{
+	AddQuestion.q_number--;
+	document.getElementById("q_number").innerHTML = AddQuestion.q_number;
+	$(id).slideUp('fast', function() { $(id).remove(); RefreshQuestionNumbers(); });
+}
+
+function RefreshQuestionNumbers()
+{
+	var question_number = 1;
+	var spans = document.getElementsByTagName('span');
+	for (var i=0;i<spans.length;i++)
+	{                      
+	    if(spans[i].id.indexOf("question_number") == 0) 
+	    { 
+		    spans[i].innerHTML = "<b>Question "+question_number+"</b><br/>"; 
+		    question_number++; 
+	    }
+	}
+}
+
+function ShowHelp()
+{
+	window.open('help.html','help','width=400, height=400, toolbar=no, scrollbars=yes');
+}
+
+function SaveQuiz()
+{
+	$.post("save", $("#quizform").serialize(), function(data)
+	{
+		if(data.length > 0)
+		{
+			$('#messagebox').html(data);
+			$('#messagebox').slideDown('fast');
+			if(data.search(/Congratulations/) != -1)
+			{
+				//$('#savebutton').attr('disabled','disabled');
+				//$('#savebutton').attr('class','disabled');
+				//setTimeout("window.location='list.php'", 3000);
+			}
+		}
+		else $('#messagebox').slideUp('fast');
+	});
+}
+
+function ClearQuiz()
+{
+	//Clear the quiz
+	var inputs = document.getElementsByTagName('input');
+	var textareas = document.getElementsByTagName('textarea');
+	for (var i=0;i<inputs.length;i++)
+	{                      
+	    if(inputs[i].type.indexOf("text") == 0) 
+	    { 
+		    inputs[i].value = ''; 
+	    }
+	}
+	
+	for (var i=0;i<textareas.length;i++)
+	{                      
+	    textareas[i].value = ''; 
+	}
+}
+
+function MarkQuiz()
+{
+	alert(totalquestions);
+}
