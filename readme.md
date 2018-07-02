@@ -1,8 +1,6 @@
-7 injected cakephp elements
-1. no javascript
-2. homepage
-3. search
-4. fullreport
-5. profile
-6. create
-7. info 
+# Quriosity
+
+Quriosity is a practice based learning platform. Quriosity consists of two components:
+
+1. API - built on Lumen
+2. Webclient - built in knockout mvvm
